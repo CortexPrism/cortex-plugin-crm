@@ -1,0 +1,237 @@
+{
+  "name": "cortex-plugin-crm",
+  "version": "1.0.0",
+  "description": "CRM Sync & Intelligence Agent — HubSpot, Salesforce, Pipedrive, and Close CRM integration with AI-driven next-best-action recommendations, pipeline management, and lead qualification",
+  "kind": "esm",
+  "entryPoint": "mod.ts",
+  "runtime": "deno",
+  "author": "CortexPrism",
+  "license": "MIT",
+  "repository": "https://github.com/CortexPrism/cortex-plugin-crm",
+  "homepage": "https://cortexprism.io/marketplace/plugins/crm",
+  "capabilities": [
+    "tools",
+    "network:fetch"
+  ],
+  "tools": [
+    {
+      "name": "crm_search_contacts",
+      "description": "Search contacts across connected CRMs by name, email, company, or custom fields",
+      "params": [
+        {
+          "name": "query",
+          "type": "string",
+          "description": "Search query (name, email, company)",
+          "required": true
+        },
+        {
+          "name": "platform",
+          "type": "string",
+          "description": "CRM platform to search",
+          "required": false,
+          "enum": ["hubspot", "salesforce", "pipedrive", "close", "all"]
+        },
+        {
+          "name": "limit",
+          "type": "number",
+          "description": "Max results (default: 10)",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "crm_get_deal",
+      "description": "Get deal details including pipeline stage, value, contacts, activities, and close probability",
+      "params": [
+        {
+          "name": "deal_id",
+          "type": "string",
+          "description": "Deal ID or search by name",
+          "required": true
+        },
+        {
+          "name": "platform",
+          "type": "string",
+          "description": "CRM platform",
+          "required": false,
+          "enum": ["hubspot", "salesforce", "pipedrive", "close"]
+        }
+      ]
+    },
+    {
+      "name": "crm_update_deal",
+      "description": "Update deal stage, add notes, change owner, or update deal properties",
+      "params": [
+        {
+          "name": "deal_id",
+          "type": "string",
+          "description": "Deal ID to update",
+          "required": true
+        },
+        {
+          "name": "platform",
+          "type": "string",
+          "description": "CRM platform",
+          "required": true,
+          "enum": ["hubspot", "salesforce", "pipedrive", "close"]
+        },
+        {
+          "name": "stage",
+          "type": "string",
+          "description": "New pipeline stage",
+          "required": false
+        },
+        {
+          "name": "notes",
+          "type": "string",
+          "description": "Activity notes to add",
+          "required": false
+        },
+        {
+          "name": "owner",
+          "type": "string",
+          "description": "Reassign to user email or ID",
+          "required": false
+        },
+        { "name": "amount", "type": "number", "description": "Deal amount", "required": false }
+      ]
+    },
+    {
+      "name": "crm_create_contact",
+      "description": "Create a new contact or lead in the CRM with enrichment data",
+      "params": [
+        {
+          "name": "platform",
+          "type": "string",
+          "description": "CRM platform",
+          "required": true,
+          "enum": ["hubspot", "salesforce", "pipedrive", "close"]
+        },
+        { "name": "first_name", "type": "string", "description": "First name", "required": true },
+        { "name": "last_name", "type": "string", "description": "Last name", "required": true },
+        { "name": "email", "type": "string", "description": "Email address", "required": false },
+        { "name": "company", "type": "string", "description": "Company name", "required": false },
+        { "name": "phone", "type": "string", "description": "Phone number", "required": false },
+        {
+          "name": "tags",
+          "type": "string",
+          "description": "Comma-separated tags",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "crm_get_pipeline",
+      "description": "Get pipeline summary: deal count by stage, total value, weighted forecast, and stage conversion rates",
+      "params": [
+        {
+          "name": "platform",
+          "type": "string",
+          "description": "CRM platform",
+          "required": true,
+          "enum": ["hubspot", "salesforce", "pipedrive", "close"]
+        },
+        {
+          "name": "owner",
+          "type": "string",
+          "description": "Filter by owner email (optional)",
+          "required": false
+        },
+        {
+          "name": "date_range",
+          "type": "string",
+          "description": "Date range filter (e.g. 'this_month', 'last_quarter')",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "crm_suggest_actions",
+      "description": "AI-driven next-best-action recommendations based on deal history, engagement data, and pipeline health. Suggests follow-ups, re-engagement, or escalation.",
+      "params": [
+        {
+          "name": "deal_id",
+          "type": "string",
+          "description": "Deal ID to analyze (omit for overall pipeline recommendations)",
+          "required": false
+        },
+        {
+          "name": "platform",
+          "type": "string",
+          "description": "CRM platform",
+          "required": true,
+          "enum": ["hubspot", "salesforce", "pipedrive", "close"]
+        },
+        {
+          "name": "context",
+          "type": "string",
+          "description": "Additional context about the deal or situation",
+          "required": false
+        }
+      ]
+    }
+  ],
+  "dependencies": {},
+  "peerDependencies": {
+    "cortex": ">=1.0.0"
+  },
+  "ui": {
+    "settings": [
+      {
+        "section": "HubSpot",
+        "fields": [
+          {
+            "key": "hubspotApiKey",
+            "label": "HubSpot API Key",
+            "type": "secret",
+            "defaultValue": ""
+          }
+        ]
+      },
+      {
+        "section": "Salesforce",
+        "fields": [
+          {
+            "key": "salesforceClientId",
+            "label": "Salesforce Client ID",
+            "type": "text",
+            "defaultValue": ""
+          },
+          {
+            "key": "salesforceClientSecret",
+            "label": "Salesforce Client Secret",
+            "type": "secret",
+            "defaultValue": ""
+          },
+          {
+            "key": "salesforceInstanceUrl",
+            "label": "Salesforce Instance URL",
+            "type": "text",
+            "defaultValue": "https://login.salesforce.com"
+          }
+        ]
+      },
+      {
+        "section": "Pipedrive",
+        "fields": [
+          {
+            "key": "pipedriveApiToken",
+            "label": "Pipedrive API Token",
+            "type": "secret",
+            "defaultValue": ""
+          }
+        ]
+      },
+      {
+        "section": "Close CRM",
+        "fields": [
+          { "key": "closeApiKey", "label": "Close API Key", "type": "secret", "defaultValue": "" }
+        ]
+      }
+    ]
+  },
+  "aiDisclosure": {
+    "tools": ["Kilo (DeepSeek) — scaffold and implementation"],
+    "humanReview": true
+  }
+}

@@ -1,7 +1,7 @@
 {
   "name": "cortex-plugin-crm",
-  "version": "1.0.0",
-  "description": "CRM Sync & Intelligence Agent — HubSpot, Salesforce, Pipedrive, and Close CRM integration with AI-driven next-best-action recommendations, pipeline management, and lead qualification",
+  "version": "1.0.1",
+  "description": "CRM Sync & Intelligence Agent \u2014 HubSpot, Salesforce, Pipedrive, and Close CRM integration with AI-driven next-best-action recommendations, pipeline management, and lead qualification",
   "kind": "esm",
   "entryPoint": "mod.ts",
   "runtime": "deno",
@@ -29,7 +29,13 @@
           "type": "string",
           "description": "CRM platform to search",
           "required": false,
-          "enum": ["hubspot", "salesforce", "pipedrive", "close", "all"]
+          "enum": [
+            "hubspot",
+            "salesforce",
+            "pipedrive",
+            "close",
+            "all"
+          ]
         },
         {
           "name": "limit",
@@ -54,7 +60,12 @@
           "type": "string",
           "description": "CRM platform",
           "required": false,
-          "enum": ["hubspot", "salesforce", "pipedrive", "close"]
+          "enum": [
+            "hubspot",
+            "salesforce",
+            "pipedrive",
+            "close"
+          ]
         }
       ]
     },
@@ -73,7 +84,12 @@
           "type": "string",
           "description": "CRM platform",
           "required": true,
-          "enum": ["hubspot", "salesforce", "pipedrive", "close"]
+          "enum": [
+            "hubspot",
+            "salesforce",
+            "pipedrive",
+            "close"
+          ]
         },
         {
           "name": "stage",
@@ -93,7 +109,12 @@
           "description": "Reassign to user email or ID",
           "required": false
         },
-        { "name": "amount", "type": "number", "description": "Deal amount", "required": false }
+        {
+          "name": "amount",
+          "type": "number",
+          "description": "Deal amount",
+          "required": false
+        }
       ]
     },
     {
@@ -105,13 +126,43 @@
           "type": "string",
           "description": "CRM platform",
           "required": true,
-          "enum": ["hubspot", "salesforce", "pipedrive", "close"]
+          "enum": [
+            "hubspot",
+            "salesforce",
+            "pipedrive",
+            "close"
+          ]
         },
-        { "name": "first_name", "type": "string", "description": "First name", "required": true },
-        { "name": "last_name", "type": "string", "description": "Last name", "required": true },
-        { "name": "email", "type": "string", "description": "Email address", "required": false },
-        { "name": "company", "type": "string", "description": "Company name", "required": false },
-        { "name": "phone", "type": "string", "description": "Phone number", "required": false },
+        {
+          "name": "first_name",
+          "type": "string",
+          "description": "First name",
+          "required": true
+        },
+        {
+          "name": "last_name",
+          "type": "string",
+          "description": "Last name",
+          "required": true
+        },
+        {
+          "name": "email",
+          "type": "string",
+          "description": "Email address",
+          "required": false
+        },
+        {
+          "name": "company",
+          "type": "string",
+          "description": "Company name",
+          "required": false
+        },
+        {
+          "name": "phone",
+          "type": "string",
+          "description": "Phone number",
+          "required": false
+        },
         {
           "name": "tags",
           "type": "string",
@@ -129,7 +180,12 @@
           "type": "string",
           "description": "CRM platform",
           "required": true,
-          "enum": ["hubspot", "salesforce", "pipedrive", "close"]
+          "enum": [
+            "hubspot",
+            "salesforce",
+            "pipedrive",
+            "close"
+          ]
         },
         {
           "name": "owner",
@@ -160,7 +216,12 @@
           "type": "string",
           "description": "CRM platform",
           "required": true,
-          "enum": ["hubspot", "salesforce", "pipedrive", "close"]
+          "enum": [
+            "hubspot",
+            "salesforce",
+            "pipedrive",
+            "close"
+          ]
         },
         {
           "name": "context",
@@ -173,7 +234,7 @@
   ],
   "dependencies": {},
   "peerDependencies": {
-    "cortex": ">=1.0.0"
+    "cortex": ">=0.51.0"
   },
   "ui": {
     "settings": [
@@ -225,13 +286,20 @@
       {
         "section": "Close CRM",
         "fields": [
-          { "key": "closeApiKey", "label": "Close API Key", "type": "secret", "defaultValue": "" }
+          {
+            "key": "closeApiKey",
+            "label": "Close API Key",
+            "type": "secret",
+            "defaultValue": ""
+          }
         ]
       }
     ]
   },
   "aiDisclosure": {
-    "tools": ["Kilo (DeepSeek) — scaffold and implementation"],
+    "tools": [
+      "Kilo (DeepSeek) \u2014 scaffold and implementation"
+    ],
     "humanReview": true
   }
 }

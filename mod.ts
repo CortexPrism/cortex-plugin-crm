@@ -8,11 +8,11 @@
  * Plugin #189 from plugin-ideas.md
  */
 
-import type { PluginContext, Tool, ToolResult } from 'cortex/plugins';
+import type { PluginContext, Tool, ToolCallResult } from 'cortex/plugins';
 
 // ─── Helpers ──────────────────────────────────────────────────────────
 
-function validatePlatform(platform: string, _ctx: PluginContext): ToolResult | null {
+function validatePlatform(platform: string, _ctx: PluginContext): ToolCallResult | null {
   const allowed = ['hubspot', 'salesforce', 'pipedrive', 'close'];
   if (!allowed.includes(platform)) {
     return {
@@ -75,7 +75,7 @@ const searchContactsTool: Tool = {
     capabilities: ['network:fetch'],
   },
 
-  execute: async (args: Record<string, unknown>, ctx: PluginContext): Promise<ToolResult> => {
+  execute: async (args: Record<string, unknown>, ctx: PluginContext): Promise<ToolCallResult> => {
     const start = Date.now();
     try {
       const query = args.query;
@@ -164,7 +164,7 @@ const getDealTool: Tool = {
     capabilities: ['network:fetch'],
   },
 
-  execute: async (args: Record<string, unknown>, ctx: PluginContext): Promise<ToolResult> => {
+  execute: async (args: Record<string, unknown>, ctx: PluginContext): Promise<ToolCallResult> => {
     const start = Date.now();
     try {
       const dealId = args.deal_id as string;
@@ -245,7 +245,7 @@ const updateDealTool: Tool = {
     capabilities: ['network:fetch'],
   },
 
-  execute: async (args: Record<string, unknown>, ctx: PluginContext): Promise<ToolResult> => {
+  execute: async (args: Record<string, unknown>, ctx: PluginContext): Promise<ToolCallResult> => {
     const start = Date.now();
     try {
       const dealId = args.deal_id as string;
@@ -330,7 +330,7 @@ const createContactTool: Tool = {
     capabilities: ['network:fetch'],
   },
 
-  execute: async (args: Record<string, unknown>, ctx: PluginContext): Promise<ToolResult> => {
+  execute: async (args: Record<string, unknown>, ctx: PluginContext): Promise<ToolCallResult> => {
     const start = Date.now();
     try {
       const platform = args.platform as string;
@@ -410,7 +410,7 @@ const getPipelineTool: Tool = {
     capabilities: ['network:fetch'],
   },
 
-  execute: async (args: Record<string, unknown>, ctx: PluginContext): Promise<ToolResult> => {
+  execute: async (args: Record<string, unknown>, ctx: PluginContext): Promise<ToolCallResult> => {
     const start = Date.now();
     try {
       const platform = args.platform as string;
@@ -485,7 +485,7 @@ const suggestActionsTool: Tool = {
     capabilities: ['network:fetch'],
   },
 
-  execute: async (args: Record<string, unknown>, ctx: PluginContext): Promise<ToolResult> => {
+  execute: async (args: Record<string, unknown>, ctx: PluginContext): Promise<ToolCallResult> => {
     const start = Date.now();
     try {
       const platform = args.platform as string;
